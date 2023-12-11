@@ -53,7 +53,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* Logo e Nome do Aplicativo */}
-      <Image source={require("../assets/logo.png")} style={styles.logo} />
+      <Image source={require("../../../assets/logo.png")} style={styles.logo} />
       <View style={styles.appNameContainer}>
         <Text style={[styles.appName, { color: "#4caf50" }]}>Investe</Text>
         <Text
