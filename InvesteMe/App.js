@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Cadastro from './Cadastro/Cadastro';
+import Cadastro from './src/screens/Cadastro/Cadastro';
 
 export default function App() {
   return (
