@@ -27,7 +27,7 @@ export default function App() {
 
   const submitForm = () => {
     // Verificações básicas
-    if (!fullName) {
+    if (!fullName.trim()) {
       Alert.alert("Erro", "Por favor, digite seu nome completo.");
       return;
     }
@@ -114,6 +114,23 @@ export default function App() {
             secureTextEntry
           />
         </View>
+
+        <View style={styles.inputContainer}>
+          <View style={styles.labelContainer}>
+            <Text style={[styles.labelText, { color: "#424866" }]}>
+              Confirmar Palavra Passe
+            </Text>
+            <FontAwesome5 name="lock" size={18} color= "#424866" />
+          </View>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            placeholder="Confirmar a sua palavra passe"
+            secureTextEntry
+          />
+        </View>
+
       </View>
 
       <TouchableOpacity style={styles.button} onPress={submitForm}>
