@@ -64,7 +64,7 @@ const Conta = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.nextButton}
-            onPress={() => navigation.navigate("NextScreen")}
+            onPress={() => navigation.navigate("Confirmacao")}
           >
             <Text style={styles.buttonText2}>Avançar </Text>
             <AntDesign name="arrowright" size={24} color="white" />

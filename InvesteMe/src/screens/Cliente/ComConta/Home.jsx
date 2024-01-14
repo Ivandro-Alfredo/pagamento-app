@@ -8,7 +8,7 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 // Componente para exibição de cada investimento
 const InvestmentItem = ({ name, amount, received, onPressAnalyze }) => (
@@ -39,7 +39,7 @@ const InvestOptionItem = ({ imageUri, title, onPress }) => (
 );
 
 // Componente principal HomeScreen
-const HomeScreen = ({ navigation }) => {
+const CConta = ({ navigation }) => {
   const investmentsData = [
     {
       id: "1",
@@ -287,4 +287,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default CConta;

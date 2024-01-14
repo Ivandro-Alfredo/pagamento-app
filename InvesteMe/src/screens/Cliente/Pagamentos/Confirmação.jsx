@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesome, Octicons, AntDesign } from "@expo/vector-icons";
 
-const HomeScreen = () => {
+const Confirmacao = () => {
   return (
     <View style={styles.container}>
       {/* Nova Barra Verde com Ícone do Logo e Nome do Aplicativo */}
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Confirmacao;
