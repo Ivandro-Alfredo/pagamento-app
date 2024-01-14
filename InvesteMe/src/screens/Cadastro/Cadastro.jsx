@@ -9,11 +9,15 @@ import {
   Alert,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native"; // Importe useNavigation
 
-export default function App() {
+export default function Cadastro() {
+  const navigation = useNavigation(); // Inicialize o objeto de navegação
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,24 +25,18 @@ export default function App() {
   };
 
   const isValidPassword = (password) => {
-    // Adicione suas regras de validação de senha aqui (por exemplo, comprimento mínimo)
     return password.length >= 6;
   };
 
   const submitForm = () => {
     // Verificações básicas
-    if (!fullName.trim()) {
-      Alert.alert("Erro", "Por favor, digite seu nome completo.");
-      return;
-    }
-
-    if (!isValidEmail(email)) {
-      Alert.alert("Erro", "Por favor, digite um e-mail válido.");
-      return;
-    }
-
-    if (!isValidPassword(password)) {
-      Alert.alert("Erro", "A palavra-passe deve ter pelo menos 6 caracteres.");
+    if (
+      !fullName.trim() ||
+      !isValidEmail(email) ||
+      !isValidPassword(password) ||
+      password !== confirmPassword
+    ) {
+      Alert.alert("Erro", "Por favor, verifique os campos e tente novamente.");
       return;
     }
 
@@ -48,6 +46,9 @@ export default function App() {
     console.log("Palavra Passe:", password);
 
     // Adicione lógica adicional conforme necessário
+
+    // Navegue para a tela de login
+    navigation.navigate("Login");
   };
 
   return (
@@ -104,7 +105,7 @@ export default function App() {
             <Text style={[styles.labelText, { color: "#424866" }]}>
               Palavra Passe
             </Text>
-            <FontAwesome5 name="lock" size={18} color= "#424866" />
+            <FontAwesome5 name="lock" size={18} color="#424866" />
           </View>
           <TextInput
             style={styles.input}
@@ -120,26 +121,30 @@ export default function App() {
             <Text style={[styles.labelText, { color: "#424866" }]}>
               Confirmar Palavra Passe
             </Text>
-            <FontAwesome5 name="lock" size={18} color= "#424866" />
+            <FontAwesome5 name="lock" size={18} color="#424866" />
           </View>
           <TextInput
             style={styles.input}
-            onChangeText={(text) => setPassword(text)}
-            value={password}
+            onChangeText={(text) => setConfirmPassword(text)}
+            value={confirmPassword}
             placeholder="Confirmar a sua palavra passe"
             secureTextEntry
           />
         </View>
-
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={submitForm}>
+      <TouchableOpacity style={styles.registerButton} 
+      onPress={() => navigation.navigate("Pagamento")}>
         <Text style={styles.buttonText}>Registrar</Text>
+        <FontAwesome5 name="arrow-right" size={18} color="white" />
       </TouchableOpacity>
 
-      {/* Botão sem fundo com riscas roxas */}
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Aceder Conta</Text>
+      {/* Botão para navegar para a tela de login */}
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => navigation.navigate("Login")}>
+        <Text style={styles.buttonText}>Já tem uma conta? Aceder aqui</Text>
+        <FontAwesome5 name="arrow-right" size={18} color="white" />
       </TouchableOpacity>
     </View>
   );
@@ -166,8 +171,6 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 24,
     fontWeight: "bold",
-    flexDirection: "row",
-    alignItems: "center",
   },
   formContainer: {
     width: "100%",
@@ -193,16 +196,25 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
   },
-  button: {
+  registerButton: {
     backgroundColor: "#800080",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 15,
     borderRadius: 8,
-    alignItems: "center",
     marginBottom: 10,
     width: "70%", // Ocupa 100% da largura
   },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
+
+  loginButton: {
+    backgroundColor: "#424866",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    width: "70%", // Ocupa 100% da largura
   },
 });

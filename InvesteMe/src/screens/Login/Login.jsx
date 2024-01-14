@@ -7,11 +7,13 @@ import {
   TouchableOpacity,
   Image,
   Alert,
-  KeyboardAvoidingView,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native"; // Importe useNavigation
 
 export default function Login() {
+  const navigation = useNavigation(); // Inicialize o objeto de navegação
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,69 +49,68 @@ export default function Login() {
   };
 
   return (
-    <KeyboardAvoidingView>
-      <View style={styles.container}>
-        {/* Logo e Nome do Aplicativo */}
-        <Image
-          source={require("../../../assets/logo.png")}
-          style={styles.logo}
-        />
-        <View style={styles.appNameContainer}>
-          <Text style={[styles.appName, { color: "#4caf50" }]}>Investe</Text>
-          <Text
-            style={{
-              marginVertical: 20,
-              fontSize: 20,
-              fontWeight: "bold",
-              color: "#800080",
-            }}
-          >
-            Me
-          </Text>
-        </View>
-
-        {/* Formulário de Cadastro */}
-        <View style={styles.formContainer}>
-          <View style={styles.inputContainer}>
-            <View style={styles.labelContainer}>
-              <Text style={[styles.labelText, { color: "#424866" }]}>
-                Email
-              </Text>
-              <FontAwesome5 name="envelope" size={18} color="#424866" />
-            </View>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setEmail(text)}
-              value={email}
-              placeholder="Digite seu email"
-              keyboardType="email-address"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <View style={styles.labelContainer}>
-              <Text style={[styles.labelText, { color: "#424866" }]}>
-                Palavra Passe
-              </Text>
-              <FontAwesome5 name="lock" size={18} color="#424866" />
-            </View>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-              placeholder="Digite sua palavra passe"
-              secureTextEntry
-            />
-          </View>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={submitForm}>
-          <Text style={styles.buttonText}>Aceder Conta</Text>
-        </TouchableOpacity>
-        {/* Botão sem fundo com riscas roxas */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Registrar</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      {/* Logo e Nome do Aplicativo */}
+      <Image source={require("../../../assets/logo.png")} style={styles.logo} />
+      <View style={styles.appNameContainer}>
+        <Text style={[styles.appName, { color: "#4caf50" }]}>Investe</Text>
+        <Text
+          style={{
+            marginVertical: 20,
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "#800080",
+          }}
+        >
+          Me
+        </Text>
       </View>
-    </KeyboardAvoidingView>
+
+      {/* Formulário de Cadastro */}
+      <View style={styles.formContainer}>
+        <View style={styles.inputContainer}>
+          <View style={styles.labelContainer}>
+            <Text style={[styles.labelText, { color: "#424866" }]}>Email</Text>
+            <FontAwesome5 name="envelope" size={18} color="#424866" />
+          </View>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            placeholder="Digite seu email"
+            keyboardType="email-address"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <View style={styles.labelContainer}>
+            <Text style={[styles.labelText, { color: "#424866" }]}>
+              Palavra Passe
+            </Text>
+            <FontAwesome5 name="lock" size={18} color="#424866" />
+          </View>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            placeholder="Digite sua palavra passe"
+            secureTextEntry
+          />
+        </View>
+      </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <Text style={styles.buttonText}>Aceder Conta</Text>
+      </TouchableOpacity>
+      {/* Botão sem fundo com riscas roxas */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Cadastro")}
+      >
+        <Text style={styles.buttonText}>Registrar</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -134,8 +135,6 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 24,
     fontWeight: "bold",
-    flexDirection: "row",
-    alignItems: "center",
   },
   formContainer: {
     width: "100%",

@@ -65,18 +65,18 @@ const Dados = ({ navigation }) => {
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate("Home")}
           >
-<AntDesign name="arrowleft" size={24} color="green" />            
+            <AntDesign name="arrowleft" size={24} color="green" />
             <Text style={styles.buttonText}> Voltar </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.nextButton}
-            onPress={() => navigation.navigate("NextScreen")}
+            onPress={() => navigation.navigate("Conta")}
           >
-            <Text style={styles.buttonText2}>Avançar  </Text>
+            <Text style={styles.buttonText2}>Avançar </Text>
 
-<AntDesign name="arrowright" size={24} color="white" />
+            <AntDesign name="arrowright" size={24} color="white" />
           </TouchableOpacity>
         </View>
       </ScrollView>
