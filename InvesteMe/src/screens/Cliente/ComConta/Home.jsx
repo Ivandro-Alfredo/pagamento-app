@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "react-native";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import Header from "../../../components/headers/header";
 
 // Componente para exibição de cada investimento
 const InvestmentItem = ({ name, amount, received, onPressAnalyze }) => (
@@ -57,19 +58,9 @@ const CConta = ({ navigation }) => {
   ];
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} stickyHeaderIndices={[0]} >
       {/* Barra Verde com Ícone de Menu */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => console.log("Clique no menu")}>
-          <FontAwesome name="bars" size={24} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>InvesteMe</Text>
-        <TouchableOpacity
-          onPress={() => console.log("Clique no ícone de notificação")}
-        >
-          <Ionicons name="notifications" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
+      <Header/>
 
       {/* Barra de Pesquisa */}
       <View style={styles.searchBar}>

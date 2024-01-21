@@ -1,6 +1,8 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Public from '../../screens/home/home';
+import MenuBuger from '../menu/menu'
+import HomeMenu from '../menu/homeMenu'
+import { PublicScreen } from '../../screens/home/home';
 import Cadastro from '../../screens/Cadastro/Cadastro';
 import Login from '../../screens/Login/Login';
 import Home from '../../screens/Cliente/ComConta/Home';
@@ -11,11 +13,7 @@ import Conta from '../../screens/Cliente/Pagamentos/Conta';
 import Fatura from "../../screens/Cliente/Pagamentos/Factura";
 import Confirmação from "../../screens/Cliente/Pagamentos/Confirmação";
 import HistoryScreen from "../../screens/Cliente/Histórico/Historico";
-import MenuBuger from '../menu/menu'
-import HomeMenu from '../menu/homeMenu'
-
 import routes from '../routes/routes';
-
 
 const Drawer = createDrawerNavigator();
 
@@ -48,7 +46,7 @@ function DrawerNavigator() {
 
 			initialRouteName={routes.PUBLIC}
         >
-			<Drawer.Screen name={routes.PUBLIC} component={Public} />
+			<Drawer.Screen name={routes.PUBLIC} component={PublicScreen} />
 
             <Drawer.Screen name={routes.HOME} component={Home} />
 

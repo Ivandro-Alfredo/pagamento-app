@@ -9,14 +9,11 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { styles } from '../../style/home/homeStyle';
-import Header from '../../components/header';
+import Header from '../../components/headers/header';
 
 
-const Stack = createNativeStackNavigator();
-import { createDrawerNavigator } from '@react-navigation/drawer';
-export default PublicScreen = ({ navigation }) => {
+export const PublicScreen = () => {
 	const [selectedArea, setSelectedArea] = useState('');
 	const [minValue, setMinValue] = useState('');
 	const [maxValue, setMaxValue] = useState('');
