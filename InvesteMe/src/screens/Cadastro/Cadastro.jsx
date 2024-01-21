@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'; // Importe useNavigation
+import routes from './../../components/routes/routes';
 
 export default function Cadastro() {
 	const navigation = useNavigation(); // Inicialize o objeto de navegação
@@ -178,7 +179,7 @@ export default function Cadastro() {
 
 				<TouchableOpacity
 					style={styles.registerButton}
-					onPress={() => navigation.navigate('Pagamento')}>
+					onPress={() => navigation.navigate(routes.HOME)}>
 					<Text style={styles.buttonText}>Registrar</Text>
 					<FontAwesome5 name='arrow-right' size={18} color='white' />
 				</TouchableOpacity>
