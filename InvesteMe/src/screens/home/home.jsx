@@ -2,137 +2,185 @@ import React, { useState } from 'react';
 import {
 	View,
 	Text,
-	TextInput,
-	TouchableOpacity,
+	Button,
 	Image,
-	Alert,
+	ScrollView,
+	TextInput,
 } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Picker } from '@react-native-picker/picker';
+import { LinearGradient } from 'expo-linear-gradient';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { styles } from '../../style/home/homeStyle';
+import Header from '../../components/header';
 
-export default function Home() {
-	const [fullName, setFullName] = useState('');
+
+const Stack = createNativeStackNavigator();
+import { createDrawerNavigator } from '@react-navigation/drawer';
+export default PublicScreen = ({ navigation }) => {
+	const [selectedArea, setSelectedArea] = useState('');
+	const [minValue, setMinValue] = useState('');
+	const [maxValue, setMaxValue] = useState('');
 	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-
-	const isValidEmail = (email) => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(email);
-	};
-
-	const isValidPassword = (password) => {
-		// Adicione suas regras de validação de senha aqui (por exemplo, comprimento mínimo)
-		return password.length >= 6;
-	};
-
-	const submitForm = () => {
-		// Verificações básicas
-		if (!fullName) {
-			Alert.alert('Erro', 'Por favor, digite seu nome completo.');
-			return;
-		}
-
-		if (!isValidEmail(email)) {
-			Alert.alert('Erro', 'Por favor, digite um e-mail válido.');
-			return;
-		}
-
-		if (!isValidPassword(password)) {
-			Alert.alert(
-				'Erro',
-				'A palavra-passe deve ter pelo menos 6 caracteres.'
-			);
-			return;
-		}
-
-		// Se chegou até aqui, os dados são válidos
-		console.log('Nome Completo:', fullName);
-		console.log('Email:', email);
-		console.log('Palavra Passe:', password);
-
-		// Adicione lógica adicional conforme necessário
-	};
 
 	return (
 		<View style={styles.container}>
-			{/* Logo e Nome do Aplicativo */}
-			<Image source={require('../../../assets/logo.png')} style={styles.logo} />
-			<View style={styles.appNameContainer}>
-				<Text style={[styles.appName, { color: '#4caf50' }]}>
-					Investe
-				</Text>
-				<Text
-					style={{
-						marginVertical: 20,
-						fontSize: 20,
-						fontWeight: 'bold',
-						color: '#800080',
-					}}>
-					Me
-				</Text>
-			</View>
-
-			{/* Formulário de Cadastro */}
-			<View style={styles.formContainer}>
-				<View style={styles.inputContainer}>
-					<View style={styles.labelContainer}>
-						<Text style={[styles.labelText, { color: '#424866' }]}>
-							Nome Completo
+			<ScrollView style={{ flex: 1 }} stickyHeaderIndices={[0]}>
+				{/* Barra Verde com Ícone de Menu */}
+				<Header />
+				<View style={styles.presentationView}>
+					<Text style={styles.TextApresetation}>
+						Crie, acelere, gerencie e escale com a{' '}
+						<Text style={styles.TextInveste}>Investe</Text>
+						<Text style={styles.TextMe}>Me</Text>
+					</Text>
+					<View style={styles.textoFoco}>
+						<Text style={styles.textoFoco.texto}>
+							Seu foco é no conteúdo e na estratégia.
 						</Text>
-						<FontAwesome5 name='user' size={18} color='#424866' />
+						<Text style={styles.textoFoco.texto}>
+							O nosso é fazer você vender e ganhar mais
+						</Text>
 					</View>
-					<TextInput
-						style={styles.input}
-						onChangeText={(text) => setFullName(text)}
-						value={fullName}
-						placeholder='Digite seu nome completo'
-					/>
 				</View>
 
-				<View style={styles.inputContainer}>
-					<View style={styles.labelContainer}>
-						<Text style={[styles.labelText, { color: '#424866' }]}>
-							Email
+				<View style={styles.formsContainer}>
+					<Text>Escolha uma área e preencha os campos abaixo</Text>
+
+					{/* Adicione o componente Picker aqui */}
+					<View style={styles.pickerContainer}>
+						<Picker
+							selectedValue={selectedArea}
+							onValueChange={(itemValue) =>
+								setSelectedArea(itemValue)
+							}
+							style={styles.picker}>
+							<Picker.Item label='Selecione aqui' value='Selecione' />
+							<Picker.Item label='Área 2' value='area2' />
+							<Picker.Item label='Área 3' value='area3' />
+						</Picker>
+					</View>
+
+					<View style={styles.forms}>
+						{/* Aqui coloca um select */}
+						<View style={styles.inputRow}>
+							<Text style={styles.label}>Valor mínimo</Text>
+							<Text style={styles.label}>Valor máximo</Text>
+						</View>
+
+						<View style={styles.inputRow}>
+							<TextInput
+								style={styles.numericInput}
+								placeholder='Digite aqui'
+								keyboardType='numeric'
+							/>
+							<TextInput
+								style={styles.numericInput}
+								placeholder='Digite aqui'
+								keyboardType='numeric'
+							/>
+						</View>
+
+						<Text style={styles.label}>Email</Text>
+						<TextInput
+							style={styles.input}
+							placeholder='Digite aqui'
+						/>
+						<View style={styles.continueButtonContainer}>
+							<Button
+								title='Continuar'
+								onPress={() => console.log('Continuar')}
+								color={'#00CC47'}
+							/>
+						</View>
+					</View>
+				</View>
+
+				<View>
+					<Text style={styles.textoIntro}>
+						Veja como fazer seus pagamentos
+					</Text>
+					<View style={styles.imagemTutorial}>
+						<Image
+							source={require('../../../assets/image3.jpg')}
+							style={styles.imagemTutorial.imagem}
+						/>
+
+						{/* Adicione um componente de vídeo rodar 'npm install react-native-video'
+						 */}
+						{/* <Video
+				source={{ uri: 'URL_DO_SEU_VIDEO' }} // Substitua pela URL do seu vídeo
+				style={{ width: 300, height: 200 }}
+				controls={true}
+			/> */}
+					</View>
+				</View>
+
+				<View>
+					<LinearGradient
+						colors={['#15CB54', '#7B61FF']}
+						style={styles.linearGradient}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 1 }}>
+						{/* Adicione o conteúdo que você deseja dentro do LinearGradient */}
+						<Text style={styles.gradientView.texto}>
+							Como funciona
 						</Text>
-						<FontAwesome5
-							name='envelope'
-							size={18}
-							color='#424866'
+						<View style={styles.gradientView}>
+							<Text
+								style={styles.gradientView.queroInvestirTexto}>
+								1- Quero Investir
+							</Text>
+							<View>
+								<Text style={styles.gradientView.investir}>
+									Selecione o projecto: Consulte os valores e
+									fale com o financiado.
+								</Text>
+							</View>
+						</View>
+						<View style={styles.gradientView}>
+							<Text style={styles.gradientView.financiado}>
+								2 - Quero ser financiado
+							</Text>
+							<Text style={styles.gradientView.financiador}>
+								Selecione em quantos projectos deseja colocar na
+								plataforma.
+							</Text>
+						</View>
+						<View style={styles.gradientView}>
+							<Text style={styles.gradientView.pagamento}>
+								3- Apenas quero fazer pagamentos
+							</Text>
+							<Text style={styles.gradientView.pagar}>
+								Após o pagamento será emitido um comprovante .
+							</Text>
+						</View>
+					</LinearGradient>
+				</View>
+
+				<View style={styles.showImage}>
+					<Text style={styles.showImage.texto}>
+						Plataforma escolhida por milhares de Investidores
+					</Text>
+					<View>
+						<Image
+							source={require('../../../assets/imagem2.jpg')}
+							style={styles.showImage.imagem1}
 						/>
 					</View>
-					<TextInput
-						style={styles.input}
-						onChangeText={(text) => setEmail(text)}
-						value={email}
-						placeholder='Digite seu email'
-						keyboardType='email-address'
-					/>
-				</View>
-
-				<View style={styles.inputContainer}>
-					<View style={styles.labelContainer}>
-						<Text style={[styles.labelText, { color: '#424866' }]}>
-							Palavra Passe
-						</Text>
-						<FontAwesome5 name='lock' size={18} color='#424866' />
+					<View>
+						<Image
+							source={require('../../../assets/imagem4.jpg')}
+							style={styles.showImage.imagem2}
+						/>
 					</View>
-					<TextInput
-						style={styles.input}
-						onChangeText={(text) => setPassword(text)}
-						value={password}
-						placeholder='Digite sua palavra passe'
-						secureTextEntry
-					/>
+					<View>
+						<Image
+							source={require('../../../assets/imagem3.jpg')}
+							style={styles.showImage.imagem3}
+						/>
+					</View>
 				</View>
-			</View>
-
-			<TouchableOpacity style={styles.button} onPress={submitForm}>
-				<Text style={styles.buttonText}>Registrar</Text>
-			</TouchableOpacity>
-
-			{/* Botão sem fundo com riscas roxas */}
-			<TouchableOpacity style={styles.button}>
-				<Text style={styles.buttonText}>Aceder Conta</Text>
-			</TouchableOpacity>
+			</ScrollView>
 		</View>
 	);
-}
+};

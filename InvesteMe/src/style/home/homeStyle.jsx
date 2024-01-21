@@ -1,63 +1,199 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#f4f4f4',
-		padding: 20,
+		backgroundColor: '#f8f8f8',
 	},
-	logo: {
-		width: 100,
-		height: 100,
-		marginBottom: 10,
+	formsContainer: {
+		backgroundColor: '#FFFFFF',
+		marginLeft: 10,
+		marginRight: 10,
+		padding: 22,
+		marginTop: 25,
+		width: 300,
+		height: 345,
+		borderRadius: 9,
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 10,
+			height: 8,
+		},
+		shadowOpacity: 0.4,
+		shadowRadius: 4,
+		elevation: 5,
 	},
-	appNameContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginBottom: 20,
+	forms: {
+		backgroundColor: '#FFFFFF',
+		width: 250,
+		height: 200,
+		marginTop: 30,
 	},
-	appName: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-	formContainer: {
-		width: '100%',
-		marginTop: 20,
-	},
-	inputContainer: {
-		marginBottom: 20,
-	},
-	labelContainer: {
+	inputRow: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: 5,
-	},
-	labelText: {
-		flex: 1,
-		fontSize: 16,
-	},
-	input: {
-		width: '100%',
-		height: 40,
-		borderColor: '#800080',
-		borderBottomWidth: 1,
-		borderRadius: 8,
-		paddingHorizontal: 10,
-	},
-	button: {
-		backgroundColor: '#800080',
-		padding: 15,
-		borderRadius: 8,
 		alignItems: 'center',
 		marginBottom: 10,
-		width: '70%', // Ocupa 100% da largura
 	},
-	buttonText: {
-		color: 'white',
+
+	label: {
+		flex: 1,
+		marginRight: 10,
+	},
+
+	numericInput: {
+		height: 35,
+		width: 120,
+		borderColor: 'gray',
+		justifyContent: 'space-between',
+		borderWidth: 1,
+		paddingLeft: 10,
+		borderRadius: 10,
+	},
+	input: {
+		height: 40,
+		borderColor: 'gray',
+		borderWidth: 1,
+		marginBottom: 10,
+		paddingLeft: 10,
+		borderRadius: 10,
+	},
+	continueButtonContainer: {
+		width: 140,
+		height: 40,
+		borderRadius: 10,
+		alignSelf: 'flex-end',
+		borderColor: '#00CC47',
+	},
+	TextMe: {
+		color: '#843EF7',
+	},
+	TextInveste: {
+		color: '#00CC47',
+	},
+	TextApresetation: {
 		fontWeight: 'bold',
+		fontSize: 26,
+	},
+	presentationView: {
+		padding: 12,
+	},
+	textoFoco: {
+		padding: 14,
+		texto: {
+			color: '#202020',
+			fontSize: 14,
+		},
+	},
+	textoIntro: {
+		color: '#202020',
+		fontWeight: 'bold',
+		fontSize: 18,
+		padding: 18,
+	},
+	pickerContainer: {
+		borderColor: 'gray',
+		borderWidth: 1,
+		borderRadius: 10,
+		overflow: 'hidden',
+		height: 42,
+	},
+	picker: {
+		height: 50,
+		width: '100%',
+	},
+	imagemTutorial: {
+		padding: 8,
+		imagem: {
+			width: 300,
+			height: 200,
+			borderRadius: 30,
+			marginBottom: 20,
+			resizeMode: 'cover',
+		},
+	},
+	linearGradient: {
+		padding: 10,
+	},
+	gradientView: {
+		backgroundColor: '#FFFFFF',
+		width: 300,
+		height: 250,
+		borderRadius: 30,
+		marginTop: 15,
+		marginBottom: 10,
+		texto: {
+			color: '#FFFFFF',
+			fontSize: 27,
+			fontWeight: 'bold',
+			padding: 22,
+			alignSelf: 'center',
+		},
+		queroInvestirTexto: {
+			color: '#00CC47',
+			fontSize: 23,
+			fontWeight: 'bold',
+			padding: 15,
+			marginTop: 75,
+		},
+		investir: {
+			fontSize: 18,
+			padding: 12,
+			color: '#202020',
+		},
+		financiado: {
+			color: '#00CC47',
+			fontSize: 22,
+			fontWeight: 'bold',
+			padding: 15,
+			marginTop: 75,
+		},
+		financiador: {
+			fontSize: 18,
+			padding: 12,
+			color: '#202020',
+		},
+		pagamento: {
+			color: '#00CC47',
+			fontSize: 22,
+			fontWeight: 'bold',
+			padding: 15,
+			marginTop: 75,
+		},
+		pagar: {
+			fontSize: 18,
+			padding: 12,
+			color: '#202020',
+		},
+	},
+	showImage:{
+		padding:15,
+		marginBottom:20,
+		texto:{
+			alignSelf:'center',
+			padding:15,
+			fontSize: 24,
+		},imagem1:{
+			width: 270,
+			borderRadius: 5,
+			marginBottom: 20,
+			resizeMode: 'cover',
+			alignSelf:'center',
+		},
+		imagem2:{
+			width: 270,
+			borderRadius: 5,
+			marginBottom: 20,
+			resizeMode: 'cover',
+			alignSelf:'center',
+		},
+		imagem3:{
+			width: 270,
+			borderRadius: 5,
+			marginBottom: 20,
+			resizeMode: 'cover',
+			alignSelf:'center',
+		}
+		
 	},
 });
