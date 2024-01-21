@@ -53,7 +53,7 @@ export default function Cadastro() {
 		// Adicione lógica adicional conforme necessário
 
 		// Navegue para a tela de login
-		navigation.navigate('Login');
+		navigation.navigate(routes.HOME);
 	};
 
 	return (
