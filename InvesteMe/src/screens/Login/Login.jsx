@@ -125,7 +125,8 @@ export default function Login() {
 						/>
 					</View>
 				</View>
-				<TouchableOpacity style={styles.button} onPress={submitForm}>
+				<TouchableOpacity style={styles.button}
+				onPress={() => navigation.navigate(routes.INVESTIDOR)}>
 					<Text style={styles.buttonText}>Aceder Conta</Text>
 				</TouchableOpacity>
 				{/* Botão sem fundo com riscas roxas */}

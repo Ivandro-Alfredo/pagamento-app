@@ -7,24 +7,18 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import Octicons from "react-native-vector-icons/Octicons";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import {Octicons, AntDesign,Ionicons} from "@expo/vector-icons";
+import routes from "../../../components/routes/routes";
+import { DrawerActions } from '@react-navigation/native';
 
-const Pagamento = () => {
-  const [selectedArea, setSelectedArea] = useState("");
+
+const Pagamento = ({navigation}) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
-  const [isAreaModalVisible, setAreaModalVisible] = useState(false);
   const [isPaymentMethodModalVisible, setPaymentMethodModalVisible] =
     useState(false);
-  const [areas, setAreas] = useState([
-    "Finanças",
-    "Imobiliário",
-    "Internet",
-    "Investimento",
-  ]);
+ 
   const [paymentMethods, setPaymentMethods] = useState([
     "Cartão de Crédito",
     "Boleto",
@@ -36,29 +30,15 @@ const Pagamento = () => {
     "Google Pay",
   ]);
 
-  const openAreaModal = () => setAreaModalVisible(true);
-  const closeAreaModal = () => setAreaModalVisible(false);
   const openPaymentMethodModal = () => setPaymentMethodModalVisible(true);
   const closePaymentMethodModal = () => setPaymentMethodModalVisible(false);
 
-  const handleAreaSelection = (area) => {
-    setSelectedArea(area);
-    closeAreaModal();
-  };
 
   const handlePaymentMethodSelection = (method) => {
     setSelectedPaymentMethod(method);
     closePaymentMethodModal();
   };
 
-  const renderAreaItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.modalItem}
-      onPress={() => handleAreaSelection(item)}
-    >
-      <Text>{item}</Text>
-    </TouchableOpacity>
-  );
 
   const renderPaymentMethodItem = ({ item }) => (
     <TouchableOpacity
@@ -82,25 +62,19 @@ const Pagamento = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => console.log("Clique na seta")}>
+      <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
           <Octicons name="three-bars" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.headerText}>InvesteMe</Text>
         <TouchableOpacity
-          onPress={() => console.log("Clique no ícone de seta")}
-        >
-          <AntDesign name="login" size={24} color="white" />
-        </TouchableOpacity>
+onPress={() => navigation.navigate(routes.INVESTIDOR)} >
+        <AntDesign name="home" size={24} color="white" />
+</TouchableOpacity>
       </View>
 
       <View style={styles.content}>
         <Text style={styles.searchLabel}>Pesquise o Tipo de Pagamento</Text>
 
-        <View style={styles.inputContainer}>
-          <TouchableOpacity style={styles.selectButton} onPress={openAreaModal}>
-            <Text>{selectedArea || "Selecione a área"}</Text>
-          </TouchableOpacity>
-        </View>
 
         <View style={styles.inputContainer}>
           <TouchableOpacity
@@ -144,7 +118,7 @@ const Pagamento = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.navigationButton}
-            onPress={handleForwardButton}
+            onPress={() => navigation.navigate(routes.DADOS)}
           >
             <AntDesign name="right" size={24} color="#00aa00" />
             <Text>Avançar</Text>
@@ -152,16 +126,6 @@ const Pagamento = () => {
         </View>
       </View>
 
-      {isAreaModalVisible && (
-        <View style={styles.modal}>
-          <FlatList
-            data={areas}
-            renderItem={renderAreaItem}
-            keyExtractor={(item) => item}
-            style={styles.modalList}
-          />
-        </View>
-      )}
 
       {isPaymentMethodModalVisible && (
         <View style={styles.modal}>
