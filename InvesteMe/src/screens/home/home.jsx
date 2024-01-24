@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import {
 	View,
 	Text,
@@ -6,11 +6,19 @@ import {
 	Image,
 	ScrollView,
 	TextInput,
+	Platform, 
+	SafeAreaView
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';  // Importe o hook de navegação
+
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '../../style/home/homeStyle';
 import Header from '../../components/headers/header';
+/* import Video from 'react-native-video'; */
+import { Video } from 'expo-av';
+import routes from '../../components/routes/routes';
+
 
 
 export const PublicScreen = () => {
@@ -19,9 +27,14 @@ export const PublicScreen = () => {
 	const [maxValue, setMaxValue] = useState('');
 	const [email, setEmail] = useState('');
 
+	const navigation = useNavigation();
+
+
 	return (
+
 		<View style={styles.container}>
-			<ScrollView style={{ flex: 1 }} stickyHeaderIndices={[0]}>
+			<ScrollView style={{ flex: 1 ,
+			padding: Platform.OS === 'ios'}}stickyHeaderIndices={[0]}>
 				{/* Barra Verde com Ícone de Menu */}
 				<Header />
 				<View style={styles.presentationView}>
@@ -85,7 +98,7 @@ export const PublicScreen = () => {
 						<View style={styles.continueButtonContainer}>
 							<Button
 								title='Continuar'
-								onPress={() => console.log('Continuar')}
+								onPress={() => navigation.navigate(routes.LOGIN)}
 								color={'#00CC47'}
 							/>
 						</View>
@@ -97,10 +110,21 @@ export const PublicScreen = () => {
 						Veja como fazer seus pagamentos
 					</Text>
 					<View style={styles.imagemTutorial}>
-						<Image
-							source={require('../../../assets/image3.jpg')}
-							style={styles.imagemTutorial.imagem}
-						/>
+
+
+
+					<Video
+      source={require('../../../assets/video.mp4')}
+      style={{ width: 300, height: 200 }}
+      useNativeControls={true}
+    />
+
+					{/*<Video
+  source={require('../../../assets/mixkit-casual-business-meeting-of-entrepreneurs-33035-medium.mp4')} // Substitua o caminho pelo seu vídeo
+  controls={true} // Adicione esta linha se deseja exibir controles de reprodução
+  resizeMode="contain" // Ajuste conforme necessário
+						/>*/}
+
 
 						{/* Adicione um componente de vídeo rodar 'npm install react-native-video'
 						 */}
