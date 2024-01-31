@@ -1,21 +1,22 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesome, Octicons, AntDesign } from "@expo/vector-icons";
+import { DrawerActions } from '@react-navigation/native';
 
-const Confirmacao = () => {
+
+const Confirmacao = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* Nova Barra Verde com Ícone do Logo e Nome do Aplicativo */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => console.log("Clique na seta")}>
-          <Octicons name="three-bars" size={24} color="#fff" />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>InvesteMe</Text>
+      <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+          <Octicons name="three-bars" size={24} color="white" />
+        </TouchableOpacity>      
+          <Text style={styles.headerText}>InvesteMe</Text>
         <TouchableOpacity
-          onPress={() => console.log("Clique no ícone de seta")}
-        >
-          <AntDesign name="login" size={24} color="#fff" />
-        </TouchableOpacity>
+onPress={() => navigation.navigate(routes.INVESTIDOR)} >
+        <AntDesign name="home" size={24} color="white" />
+</TouchableOpacity>
       </View>
 
       {/* Conteúdo da Home */}

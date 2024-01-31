@@ -7,5 +7,8 @@ export default{
     DRAWER: 'Menu',
     PAGAMENTO:'Pagamento',
     CONTA:'Conta',
-    DADOS:'Dados'
+    DADOS:'Dados',
+    CLIENTE:'Cliente',
+    INVESTIDOR:'Investidor',
+    CONFIRMACAO:'Confirmacao'
 }
