@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import registarUser from '../controllers/users/create'
-import verificarUser from '../controllers/users/create'
-
+import verificarUser from '../controllers/users/login'
 
 const router = Router();
 
@@ -10,6 +9,6 @@ router.get("/", (_, res) => {
 });
 
 router.post('/registarUsuario',registarUser.createUser)
-router.get('/login',verificarUser.login))
+router.get('/login',verificarUser.login)
 
-export default {router}
+export {router}

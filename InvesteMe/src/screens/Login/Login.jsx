@@ -45,12 +45,9 @@ export default function Login() {
 			return;
 		}
 		() => navigation.navigate(routes.HOME);
-		// Se chegou até aqui, os dados são válidos
-		console.log('Nome Completo:', fullName);
-		console.log('Email:', email);
-		console.log('Palavra Passe:', password);
 
-		// Adicione lógica adicional conforme necessário
+		const resp = axios.get()
+		
 	};
 
 	return (

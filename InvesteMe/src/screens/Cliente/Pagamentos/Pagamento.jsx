@@ -13,7 +13,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Pagamento = () => {
   const [selectedArea, setSelectedArea] = useState("");
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");cd
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [isAreaModalVisible, setAreaModalVisible] = useState(false);
