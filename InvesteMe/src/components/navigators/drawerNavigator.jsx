@@ -5,7 +5,7 @@ import HomeMenu from '../menu/homeMenu'
 import { PublicScreen } from '../../screens/home/home';
 import Cadastro from '../../screens/Cadastro/Cadastro';
 import Login from '../../screens/Login/Login';
-import Home from '../../screens/Cliente/ComConta/Home';
+//import Home from '../../screens/Cliente/ComConta/Home';
 import Pagamento from "../../screens/Cliente/Pagamentos/Pagamento";
 import Processamento from "../../screens/Cliente/Pagamentos/Processo";
 import Dados from "../../screens/Cliente/Pagamentos/Dados";
@@ -14,6 +14,9 @@ import Fatura from "../../screens/Cliente/Pagamentos/Factura";
 import Confirmação from "../../screens/Cliente/Pagamentos/Confirmação";
 import HistoryScreen from "../../screens/Cliente/Histórico/Historico";
 import routes from '../routes/routes';
+import Cliente from '../../screens/Cliente/Cliente';
+import Investidor from '../../screens/Investidor/Investidor';
+import Confirmacao from '../../screens/Cliente/Pagamentos/Confirmação';
 
 const Drawer = createDrawerNavigator();
 
@@ -48,7 +51,7 @@ function DrawerNavigator() {
         >
 			<Drawer.Screen name={routes.PUBLIC} component={PublicScreen} />
 
-            <Drawer.Screen name={routes.HOME} component={Home} />
+           {/* <Drawer.Screen name={routes.HOME} component={Home} />*/}
 
 			<Drawer.Screen name={routes.LOGIN} component={Login} />
 
@@ -59,6 +62,14 @@ function DrawerNavigator() {
             <Drawer.Screen name={routes.PAGAMENTO} component={Pagamento} />
 
             <Drawer.Screen name={routes.DADOS} component={Dados} />
+
+            <Drawer.Screen name={routes.CLIENTE} component={Cliente} />
+
+            <Drawer.Screen name={routes.INVESTIDOR} component={Investidor} />
+
+            <Drawer.Screen name={routes.CONFIRMACAO} component={Confirmacao} />
+
+
         </Drawer.Navigator>
     );
 }

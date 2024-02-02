@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -10,6 +11,9 @@ import {
   ScrollView,
 } from "react-native";
 import { AntDesign, Octicons } from "@expo/vector-icons";
+import routes from "../../../components/routes/routes";
+import { DrawerActions } from '@react-navigation/native';
+
 
 const Dados = ({ navigation }) => {
   return (
@@ -17,19 +21,18 @@ const Dados = ({ navigation }) => {
       <ScrollView>
         {/* Barra Verde com Logo, Nome do Aplicativo e Ícone de Entrar na Conta */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => console.log("Clique na seta")}>
-            <Octicons name="three-bars" size={24} color="white" />
-          </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+          <Octicons name="three-bars" size={24} color="white" />
+        </TouchableOpacity>
           {/*} <Image
             source={require("../../../../assets/logo.png")}
             style={styles.logo}
   />*/}
           <Text style={styles.headerText}>InvesteMe</Text>
           <TouchableOpacity
-            onPress={() => console.log("Clique no ícone de seta")}
-          >
-            <AntDesign name="login" size={24} color="white" />
-          </TouchableOpacity>
+onPress={() => navigation.navigate(routes.INVESTIDOR)} >
+        <AntDesign name="home" size={24} color="white" />
+</TouchableOpacity>
         </View>
 
         {/* Frase "Complete seus dados de usuário" */}
@@ -72,10 +75,9 @@ const Dados = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.nextButton}
-            onPress={() => navigation.navigate("Conta")}
+            onPress={() => navigation.navigate(routes.CONFIRMACAO)}
           >
             <Text style={styles.buttonText2}>Avançar </Text>
-
             <AntDesign name="arrowright" size={24} color="white" />
           </TouchableOpacity>
         </View>
