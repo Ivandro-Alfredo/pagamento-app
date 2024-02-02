@@ -2,6 +2,7 @@ import { Router } from "express";
 import pagamento from "../controllers/payment/payment";
 import historico from "../controllers/payment/historicoDePagamento";
 import todosHistorico from "../controllers/payment/pesquisarAll";
+import transferencia from "../controllers/payment/transfer";
 
 const paymentRouter = Router();
 
@@ -10,7 +11,8 @@ paymentRouter.get("/", (_, res) => {
 });
 
 paymentRouter.post("/processar", pagamento.processarPagamento);
-paymentRouter.get("/historico", historico.pesquisarHistoricoDePagamento);
-paymentRouter.get("/pesuisar_all", todosHistorico.pesuisarTodosHistoricoDePagamento);
+paymentRouter.post("/historico", historico.pesquisarHistoricoDePagamento);
+paymentRouter.post("/pesuisar_all", todosHistorico.pesquisarTodosHistoricoDePagamento);
+paymentRouter.post("/transferencia",transferencia.transferencia)
 
 export { paymentRouter };

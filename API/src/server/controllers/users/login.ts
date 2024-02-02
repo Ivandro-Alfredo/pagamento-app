@@ -10,10 +10,10 @@ interface ILogin {
     password: string;
 }
 
+const prisma = new PrismaClient();
 const login = async (req: Request<{}, {}, ILogin>, res: Response) => {
   try {
     const { email, password } = req.body;
-    const prisma = new PrismaClient();
     const usuario = await prisma.user.findUnique({
       where: { email: email },
     });
@@ -33,6 +33,8 @@ const login = async (req: Request<{}, {}, ILogin>, res: Response) => {
   } catch (error) {
     console.error("Erro no login:", error);
     res.status(StatusCodes.UNAUTHORIZED).json({ sucesso: false, mensagem: "Erro no login" });
+  }finally {
+    await prisma.$disconnect(); 
   }
 };
 

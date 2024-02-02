@@ -10,17 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user{
+model user {
     id String @default(uuid())
     nome String
-    email String @id
+    email String @id 
     password String
+    conta conta?
 }
 
-model pagamento{
-    pagamentoId String @default(uuid())
-    valor Int
+model conta {
+    contaid String @default(uuid())
+    userid String @unique 
+    proprietario String 
+    numero String @id
+    saldo Float
+    user user @relation(fields: [userid], references: [email])
+    pagamentos pagamento[]
+    transferencias transferencia[]
+}
+
+model pagamento {
+    pagamentoid String @default(uuid())
+    proprietario String @id
+    contaid String
+    valor Float
     moeda String
-    status String @id
-    
+    descricao String?
+    data DateTime
+    conta conta @relation(fields: [contaid], references: [numero])
+}
+
+model transferencia {
+    transferenciaid String @default(uuid())
+    proprietario String @id
+    contaid String
+    destinatario String
+    valor Float
+    data DateTime
+    conta conta @relation(fields: [contaid], references: [numero])
 }
