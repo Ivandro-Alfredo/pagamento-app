@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
-import {
-	StyleSheet,
-	View,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	Image,
-	Alert,
-	ScrollView,
-} from 'react-native';
+import { StyleSheet,View,Text,TextInput,TouchableOpacity,Image,Alert,ScrollView } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; // Importe useNavigation
+import { useNavigation } from '@react-navigation/native'; 
+import { styles } from '../../style/login/loginStyle'
 import routes from '../../components/routes/routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 export default function Login() {
-	const navigation = useNavigation(); // Inicialize o objeto de navegação
-
-	const [fullName, setFullName] = useState('');
+	const navigation = useNavigation();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -24,19 +16,14 @@ export default function Login() {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		return emailRegex.test(email);
 	};
-
 	const isValidPassword = (password) => {
-		// Adicione suas regras de validação de senha aqui (por exemplo, comprimento mínimo)
 		return password.length >= 6;
 	};
-
-	const submitForm = () => {
-		// Verificações básicas
+	const submitForm = async () => {
 		if (!isValidEmail(email)) {
 			Alert.alert('Erro', 'Por favor, digite um e-mail válido.');
 			return;
 		}
-
 		if (!isValidPassword(password)) {
 			Alert.alert(
 				'Erro',
@@ -44,11 +31,29 @@ export default function Login() {
 			);
 			return;
 		}
-		() => navigation.navigate(routes.HOME);
-
-		const resp = axios.get()
-		
+		try {
+			// const response = await axios.post(
+			// 	'http://192.168.43.253:3333/user/login',
+			// 	{
+			// 		email: email,
+			// 		password: password,
+			// 	}
+			// );
+			try{
+				await AsyncStorage.setItem('userEmail', email);
+				const investidor = await AsyncStorage.getItem('investidor');
+				const cliente = await AsyncStorage.getItem('cliente');
+				if (investidor === 'investidor' && cliente === null) {
+					navigation.navigate(routes.INVESTIDOR);
+				} else {
+					navigation.navigate(routes.PUBLIC);
+				}
+			}catch(e){}
+		} catch (error) {
+			Alert.alert('Erro', 'Falha no login. Por favor, tente novamente.');
+		}
 	};
+
 
 	return (
 		<ScrollView>
@@ -122,8 +127,7 @@ export default function Login() {
 						/>
 					</View>
 				</View>
-				<TouchableOpacity style={styles.button}
-				onPress={() => navigation.navigate(routes.INVESTIDOR)}>
+				<TouchableOpacity style={styles.button} onPress={submitForm}>
 					<Text style={styles.buttonText}>Aceder Conta</Text>
 				</TouchableOpacity>
 				{/* Botão sem fundo com riscas roxas */}
@@ -136,63 +140,3 @@ export default function Login() {
 		</ScrollView>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#f4f4f4',
-		padding: 20,
-	},
-	logo: {
-		width: 100,
-		height: 100,
-		marginBottom: 10,
-	},
-	appNameContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginBottom: 20,
-	},
-	appName: {
-		fontSize: 24,
-		fontWeight: 'bold',
-	},
-	formContainer: {
-		width: '100%',
-		marginTop: 20,
-	},
-	inputContainer: {
-		marginBottom: 20,
-	},
-	labelContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		marginBottom: 5,
-	},
-	labelText: {
-		flex: 1,
-		fontSize: 16,
-	},
-	input: {
-		width: '100%',
-		height: 40,
-		borderColor: '#800080',
-		borderBottomWidth: 1,
-		borderRadius: 8,
-		paddingHorizontal: 10,
-	},
-	button: {
-		backgroundColor: '#800080',
-		padding: 15,
-		borderRadius: 8,
-		alignItems: 'center',
-		marginBottom: 10,
-		width: '70%', // Ocupa 100% da largura
-	},
-	buttonText: {
-		color: 'white',
-		fontWeight: 'bold',
-	},
-});

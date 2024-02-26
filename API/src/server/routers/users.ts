@@ -9,6 +9,6 @@ router.get("/", (_, res) => {
 });
 
 router.post('/registarUsuario',registarUser.createUser)
-router.get('/login',verificarUser.login)
+router.post('/login',verificarUser.login)
 
 export {router}

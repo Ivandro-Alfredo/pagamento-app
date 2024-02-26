@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
 	},
 	formsContainer: {
 		backgroundColor: '#FFFFFF',
-		marginLeft: 10,
+		marginLeft: 50,
 		marginRight: 10,
 		padding: 22,
 		marginTop: 25,
@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
 		width: 250,
 		height: 200,
 		marginTop: 30,
+		
 	},
 	inputRow: {
 		flexDirection: 'row',
@@ -64,6 +65,7 @@ export const styles = StyleSheet.create({
 		borderRadius: 10,
 		alignSelf: 'flex-end',
 		borderColor: '#00CC47',
+		
 	},
 	TextMe: {
 		color: '#843EF7',
@@ -90,6 +92,7 @@ export const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 18,
 		padding: 18,
+		marginLeft: 40,
 	},
 	pickerContainer: {
 		borderColor: 'gray',
@@ -107,6 +110,7 @@ export const styles = StyleSheet.create({
 		imagem: {
 			width: 300,
 			height: 200,
+			marginLeft:1,
 			borderRadius: 30,
 			marginBottom: 20,
 			resizeMode: 'cover',
@@ -122,6 +126,8 @@ export const styles = StyleSheet.create({
 		borderRadius: 30,
 		marginTop: 15,
 		marginBottom: 10,
+		marginRight:30,
+		
 		texto: {
 			color: '#FFFFFF',
 			fontSize: 27,
@@ -193,7 +199,7 @@ export const styles = StyleSheet.create({
 			marginBottom: 20,
 			resizeMode: 'cover',
 			alignSelf:'center',
-		}
+		},
 		
 	},
 });

@@ -10,5 +10,6 @@ export default{
     DADOS:'Dados',
     CLIENTE:'Cliente',
     INVESTIDOR:'Investidor',
-    CONFIRMACAO:'Confirmacao'
+    CONFIRMACAO:'Confirmacao',
+    HISTORICO:"Historico"
 }

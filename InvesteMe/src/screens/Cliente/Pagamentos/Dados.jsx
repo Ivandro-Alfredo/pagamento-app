@@ -68,7 +68,7 @@ onPress={() => navigation.navigate(routes.INVESTIDOR)} >
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.navigate(routes.PAGAMENTO)}
           >
             <AntDesign name="arrowleft" size={24} color="green" />
             <Text style={styles.buttonText}> Voltar </Text>

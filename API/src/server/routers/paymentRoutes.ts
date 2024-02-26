@@ -12,7 +12,7 @@ paymentRouter.get("/", (_, res) => {
 
 paymentRouter.post("/processar", pagamento.processarPagamento);
 paymentRouter.post("/historico", historico.pesquisarHistoricoDePagamento);
-paymentRouter.post("/pesuisar_all", todosHistorico.pesquisarTodosHistoricoDePagamento);
+paymentRouter.get("/pesuisar_all", todosHistorico.pesquisarTodosHistoricoDePagamento);
 paymentRouter.post("/transferencia",transferencia.transferencia)
 
 export { paymentRouter };

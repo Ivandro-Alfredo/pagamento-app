@@ -22,8 +22,7 @@ const processarPagamento = async (req: Request<{}, {}, IPayment>, res: Response)
         // Verificar se o número da conta pertence ao proprietário
         const contaDoProprietario = await prisma.conta.findUnique({
             where: {
-                userid: email,
-                numero: numeroDaConta,
+                userid: email
             },
         });
         if (!contaDoProprietario) {
@@ -38,7 +37,7 @@ const processarPagamento = async (req: Request<{}, {}, IPayment>, res: Response)
             currency: moeda,
             payment_method: tipoDePagamento,
             description: descricao,
-            confirm: true,
+            confirm: true,  
             // receipt_email:destinatario
             automatic_payment_methods: {
                 enabled: true,
@@ -51,7 +50,7 @@ const processarPagamento = async (req: Request<{}, {}, IPayment>, res: Response)
           data: {
             pagamentoid: pagamento.id,
             proprietario:email,
-            contaid: numeroDaConta,
+            contaid: contaDoProprietario.numero ,
             valor: pagamento.amount,
             moeda: pagamento.currency,
             descricao: pagamento.description,

@@ -1,80 +1,189 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+	Animated,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather, Ionicons, FontAwesome, AntDesign } from '@expo/vector-icons';
 import { DrawerActions } from '@react-navigation/native';
-import { FontAwesome, AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import routes from '../routes/routes';
-import { styles } from '../../style/menu/menuStyle';
+import Investidor from './../../screens/Investidor/Investidor';
 
-function MenuBuger() {
-  const navigation = useNavigation();
-  const [isDriver, setIsDriver] = useState(false); // Inicialmente, é um cliente
+function MenuBurger({ isInvestidor, setIsInvestidor }) {
+	const [email, setEmail] = useState('');
+	const navigation = useNavigation();
+	const toggleSwitch = new Animated.Value(0);
 
-  const toggleRole = () => {
-    setIsDriver((prevIsDriver) => !prevIsDriver);
-  };
+	useEffect(() => {
+		Animated.timing(toggleSwitch, {
+			toValue: isInvestidor ? 36 : 0,
+			duration: 300,
+			useNativeDriver: true,
+		}).start();
+	}, [isInvestidor]);
 
-  const navigateToScreen = (screen) => {
-    navigation.navigate(screen, { isDriver }); // Passa o estado de ser motorista ou cliente para a próxima tela
-  };
+	const handleToggleSwitch = async () => {
+		try {
+			if(isInvestidor===false){
+				const investidor = 'investidor'
+				const cliente = ''
+				await AsyncStorage.setItem('investidor',investidor);
+				await AsyncStorage.setItem('cliente',cliente);
+				await AsyncStorage.setItem('userEmail', email);
+				setIsInvestidor(!isInvestidor);
+			}
+		} catch (e) {}
+	};
 
-  return (
-    <View style={styles.Container}>
-      <View>
-        <Feather
-          name="x"
-          size={40}
-          color="black"
-          style={{ marginLeft: 211, marginTop: 12, marginBottom: 30 }}
-          onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
-        />
-      </View>
+	const handleEmail = async () => {
+		try {
+			const email = await AsyncStorage.getItem('userEmail');
+			setEmail(email)
+		} catch (e) {
+			// error reading value
+		}
+	};
 
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={() => navigateToScreen(routes.LOGIN)}
-      >
-        <View>
-          <Ionicons
-            name={isDriver ? "car" : "person-circle-outline"}
-            size={55}
-            color={isDriver ? 'blue' : 'black'}
-            style={styles.Login}
-          />
-        </View>
+	useEffect(() => {
+		handleEmail();
+	},[]);
 
-        <Text style={styles.Login.textLogin}>{isDriver ? 'Motorista' : 'Cliente'}</Text>
-      </TouchableOpacity>
+	return (
+		<View style={styles.container}>
+			<Feather
+				name='x'
+				size={30}
+				color='black'
+				onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}
+				style={styles.closeIcon}
+			/>
 
-      <TouchableOpacity onPress={() => navigateToScreen(routes.PERFIL)}>
-        <AntDesign name="user" size={24} color="black" style={styles.sobre} />
-        <Text style={styles.sobre.textSobre}> Perfil</Text>
-      </TouchableOpacity>
+			{/* Botão de Login */}
+			<TouchableOpacity
+				style={styles.menuItem}
+				onPress={() => navigation.navigate(routes.LOGIN)}>
+				<Ionicons name='log-in' size={24} color='black' />
+				<Text style={styles.menuItemText}>Logout</Text>
+			</TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigateToScreen(routes.HISTORICO)}>
-        <AntDesign name="book" size={24} color="black" style={styles.sobre} />
-        <Text style={styles.sobre.textSobre}> Histórico</Text>
-      </TouchableOpacity>
+			{/* Botão de Perfil */}
+			<TouchableOpacity
+				style={styles.menuItem}
+				onPress={() => navigateToScreen('PerfilRouteName')}>
+				<AntDesign name='user' size={24} color='black' />
+				<Text style={styles.menuItemText}>Perfil</Text>
+			</TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigateToScreen(routes.SOBRE_NOS)}>
-        <FontAwesome
-          name="group"
-          size={24}
-          color="black"
-          style={styles.sobre}
-        />
-        <Text style={styles.sobre.textSobre}> Sobre Nós</Text>
-      </TouchableOpacity>
+			<TouchableOpacity
+				style={styles.menuItem}
+				onPress={() => navigation.navigate(routes.PAGAMENTO)}>
+				<Ionicons name='card-outline' size={24} color='black' />
+				<Text style={styles.menuItemText}>Pagamento</Text>
+			</TouchableOpacity>
 
-      <TouchableOpacity onPress={toggleRole} style={styles.toggleButton}>
-        <Text style={styles.toggleButtonText}>
-          {isDriver ? 'Trocar para Cliente' : 'Trocar para Motorista'}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+			{/* Botão de Transferência */}
+			<TouchableOpacity
+				style={styles.menuItem}
+				onPress={() => navigation.navigate(routes.DADOS)}>
+				<Ionicons
+					name='arrow-forward-outline'
+					size={24}
+					color='black'
+				/>
+				<Text style={styles.menuItemText}>Transferência</Text>
+			</TouchableOpacity>
+
+			{/* Botão de Histórico */}
+			<TouchableOpacity
+				style={styles.menuItem}
+				onPress={() => navigation.navigate(routes.HISTORICO)}>
+				<FontAwesome name='history' size={24} color='black' />
+				<Text style={styles.menuItemText}>Histórico</Text>
+			</TouchableOpacity>
+
+			{/* Botão de Sobre Nós */}
+			<TouchableOpacity
+				style={styles.menuItem}
+				onPress={() => navigateToScreen('SobreNosRouteName')}>
+				<Ionicons
+					name='information-circle-outline'
+					size={24}
+					color='black'
+				/>
+				<Text style={styles.menuItemText}>Sobre Nós</Text>
+			</TouchableOpacity>
+
+			{/* Switch de Motorista/Cliente */}
+			<View style={styles.switchContainer}>
+				<Text style={styles.switchLabel}>Investidor </Text>
+				<TouchableOpacity
+					onPress={handleToggleSwitch}
+					style={styles.switch}>
+					<Animated.View
+						style={[
+							styles.slider,
+							{ transform: [{ translateX: toggleSwitch }] },
+						]}>
+						<Ionicons
+							name={'wallet-outline'}
+							size={24}
+							color='white'
+						/>
+					</Animated.View>
+				</TouchableOpacity>
+			</View>
+		</View>
+	);
 }
 
-export default MenuBuger;
+const styles = StyleSheet.create({
+	container: {
+		paddingTop: 50,
+		paddingLeft: 20,
+	},
+	closeIcon: {
+		marginBottom: 20,
+	},
+	menuItem: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginBottom: 20,
+	},
+	menuItemText: {
+		marginLeft: 10,
+		fontSize: 18,
+	},
+	switchContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		marginTop: 20,
+		width: 120,
+	},
+	switchLabel: {
+		fontSize: 16,
+	},
+	switch: {
+		width: 60,
+		height: 30,
+		borderRadius: 15,
+		backgroundColor: '#ddd',
+		justifyContent: 'center',
+		overflow: 'hidden',
+	},
+	slider: {
+		position: 'absolute',
+		width: 24,
+		height: 24,
+		borderRadius: 12,
+		backgroundColor: '#007bff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+});
+
+export default MenuBurger;
